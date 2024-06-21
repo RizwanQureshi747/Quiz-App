@@ -110,7 +110,7 @@
     width: 35%;
     padding: 10px;
     background-color: #080047;
-    border: 2px solid #080047;
+    border: 2px solid black;
     border-radius: 6px;
     margin: 20px 30% 0 30%;
     cursor: pointer;
@@ -118,7 +118,9 @@
 }
 
 .main .main-body .form #formSubmitBtn:hover {
-    background-color: indigo;
+    color: #080047;
+    background-color: #fff;
+    border: 2px solid #080047;
 }
 
 .quizStartBtn {
@@ -142,4 +144,12 @@
     background-color: #080047;
     color: white;
 
+}
+
+.quizTimer{
+    font-weight: 600;
+    width: 150px;
+    height: 40px;
+    text-align: center;
+    padding-top: 10px;
 }

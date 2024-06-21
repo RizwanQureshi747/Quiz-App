@@ -88,6 +88,39 @@ var questions = [
     }
 ]
 
+
+
+// QUIZ TIMER
+var secHeading = document.getElementById("secHeading");
+var minHeading = document.getElementById("minHeading");
+
+var mSec = 100;
+var sec = 59;
+var min = 9;
+
+function quizTimer(){
+    mSec--
+
+    if(mSec === 0){
+        sec--
+        secHeading.innerHTML = sec
+        mSec = 100;
+    }else if(sec === 0){
+        min--
+        minHeading.innerHTML = min
+        sec = 59;
+    }else if(min === 0){
+
+        // IF TIME END RESULT SHOW
+        checkResult()
+    }
+}
+
+function timerStart(){
+    interval = setInterval(quizTimer, 10)
+}
+
+
 // DEFINE VARIBLES
 var htmlQues = document.getElementById("htmlQues");
 var htmlOptions = document.getElementById("htmlOptions");
@@ -127,6 +160,10 @@ function startQuizNow() {
 
     // NEXT BTN IS HIDE WHEN OPTIONS IS NOT SELECT
     nextQuizBtn.className = "hide";
+
+
+    // TIMER START
+    timerStart()
 }
 
 // NEXT QUIZ FUNCTION
@@ -199,7 +236,7 @@ function checkAnswer(ele) {
     var numericValue = parseInt(value, 10); // This will convert '0' to the number 0
     var calculate = numericValue / questions.length * 100
     var decimalValue = calculate.toFixed();
-    proValue.innerHTML = decimalValue + " %";
+    proValue.innerHTML = decimalValue + "%";
     console.log(decimalValue);
 
 
@@ -215,10 +252,10 @@ function checkAnswer(ele) {
     // GET TRYAGAIN AND END BTN
     var tryAgainBtn = document.getElementById("tryAgainBtn");
     var endQuizBtn = document.getElementById("endQuizBtn");
-
-
-
-
+    
+    
+    
+    
     // CONDITION FOR RESULT PERCNTAGE
     if (num1 < 69) {
         var failValue = fail.textContent;
@@ -252,6 +289,24 @@ function checkAnswer(ele) {
     } else {
         fail.innerHTML = "YOU NEED MORE PRACTICE!";
     }
+    
+    // PREOGRESS BAR
+        var circuleProgress = document.querySelector(".circuleProgress");
+    
+        var progressStartValue = 0;
+        var progressEndValue = num1;
+        var speed = 50;
+    
+        var progrees = setInterval(() =>{
+            progressStartValue++;
+
+            proValue.textContent = `${progressStartValue}%`
+            circuleProgress.style.background = `conic-gradient(#f0ff ${progressStartValue * 3.6}deg, #ededed 0deg)`
+
+            if(progressStartValue == progressEndValue){
+                clearInterval(progrees)
+            }
+        },speed);
 }
 
 
@@ -267,7 +322,7 @@ function checkResult() {
 
 var endQuizBtn = document.getElementById("endQuizBtn")
 
-function tryAgain(){
+function tryAgain() {
     resultDiv.className = "hide";
     signupForm.className = "hide";
 
