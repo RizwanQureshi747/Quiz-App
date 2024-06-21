@@ -82,7 +82,7 @@ var questions = [
             b: "HTML, Body, Title, Head",
             c: "HTML, Head, Title, Body",
             d: "HTML, Title , Head,  Body",
-
+            
         },
         answer: "HTML, Head, Title, Body"
     }
@@ -98,28 +98,29 @@ var mSec = 100;
 var sec = 59;
 var min = 9;
 
-function quizTimer(){
+function quizTimer() {
     mSec--
-
-    if(mSec === 0){
+    
+    if (mSec === 0) {
         sec--
         secHeading.innerHTML = sec
         mSec = 100;
-    }else if(sec === 0){
+    } else if (sec === 0) {
         min--
         minHeading.innerHTML = min
         sec = 59;
-    }else if(min === 0){
-
+    } else if (min === 0) {
+        
         // IF TIME END RESULT SHOW
         checkResult()
     }
 }
 
-function timerStart(){
+function timerStart() {
     interval = setInterval(quizTimer, 10)
 }
 
+timerStart()
 
 // DEFINE VARIBLES
 var htmlQues = document.getElementById("htmlQues");
@@ -132,38 +133,37 @@ resultBtn.className = "hide";
 
 // FUNCTION FOR QUIZ START
 function startQuizNow() {
-
+    
     // DEFINE VERIBLES
     var name = document.getElementById("name");
     var email = document.getElementById("email");
-
+    
     // QUI START BTN HIDE AND QUIZ START NOW
     quizStart.className = "hide";
     quiz.className = "quiz-main";
-
+    
     // USER NAME AND EMAIL PRINT IN QUIZ HEADER
     userName.innerHTML = name.value;
     userEmail.innerHTML = email.value;
-
-
+    
+    
     // DYNAMIC QUESTION CHANGE INNERHTML
     htmlQues.innerHTML = questions[indexNum].question;
-
+    
     // NEW OPTIONS OVERRIDE 
     htmlOptions.innerHTML = "";
-
+    
     // DYNAMIC OPTIONS CHANGE INNERHTML
     for (var key in questions[indexNum].options) {
         var option = questions[indexNum].options[key]
         htmlOptions.innerHTML += `<li onclick="checkAnswer(this)">${option}</li>`
     }
-
+    
     // NEXT BTN IS HIDE WHEN OPTIONS IS NOT SELECT
     nextQuizBtn.className = "hide";
-
-
+    
+    
     // TIMER START
-    timerStart()
 }
 
 // NEXT QUIZ FUNCTION
@@ -252,10 +252,10 @@ function checkAnswer(ele) {
     // GET TRYAGAIN AND END BTN
     var tryAgainBtn = document.getElementById("tryAgainBtn");
     var endQuizBtn = document.getElementById("endQuizBtn");
-    
-    
-    
-    
+
+
+
+
     // CONDITION FOR RESULT PERCNTAGE
     if (num1 < 69) {
         var failValue = fail.textContent;
@@ -289,24 +289,24 @@ function checkAnswer(ele) {
     } else {
         fail.innerHTML = "YOU NEED MORE PRACTICE!";
     }
-    
+
     // PREOGRESS BAR
-        var circuleProgress = document.querySelector(".circuleProgress");
-    
-        var progressStartValue = 0;
-        var progressEndValue = num1;
-        var speed = 50;
-    
-        var progrees = setInterval(() =>{
-            progressStartValue++;
+    var circuleProgress = document.querySelector(".circuleProgress");
 
-            proValue.textContent = `${progressStartValue}%`
-            circuleProgress.style.background = `conic-gradient(#f0ff ${progressStartValue * 3.6}deg, #ededed 0deg)`
+    var progressStartValue = 0;
+    var progressEndValue = num1;
+    var speed = 50;
 
-            if(progressStartValue == progressEndValue){
-                clearInterval(progrees)
-            }
-        },speed);
+    var progrees = setInterval(() => {
+        progressStartValue++;
+
+        proValue.textContent = `${progressStartValue}%`
+        circuleProgress.style.background = `conic-gradient(#f0ff ${progressStartValue * 3.6}deg, #ededed 0deg)`
+
+        if (progressStartValue == progressEndValue) {
+            clearInterval(progrees)
+        }
+    }, speed);
 }
 
 
